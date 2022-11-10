@@ -11,10 +11,17 @@ namespace Estacionamento.api.Models
 
         public TipoVeiculo TipoVeiculo { get; set; }
 
-        public string PlacaDoCarro { get; set; } ="";
+        public string PlacaDoVeiculo { get; set; } ="";
 
         public string HoraEntrada { get; set; } ="";
 
+        public string DataEntrada { get; set; } ="";
+
         public string HoraSaida { get; set; } ="";
+
+        public string DataSaida { get; set; } ="";
+
+
+        public double valorAPagar { get; set; }
     }
 }

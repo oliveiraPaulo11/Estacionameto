@@ -1,3 +1,4 @@
+using Estacionamento.api.Data;
 using Estacionamento.api.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -5,41 +6,26 @@ namespace Estacionamento.api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CarroController : ControllerBase
+public class VeiculoController : ControllerBase
 {
     
-    public IEnumerable<Veiculo> _veiculo = new Veiculo[]
-        {
-            new Veiculo{
-            VeiculoId = 1,
-            TipoVeiculo = TipoVeiculo.Carro,
-            PlacaDoCarro = "KKQ-2A66",
-            HoraEntrada = DateTime.Now.ToString(),
-            HoraSaida = DateTime.Now.AddHours(3).ToString()
-            },
-            new Veiculo{
-            VeiculoId = 2,
-            TipoVeiculo = TipoVeiculo.moto,
-            PlacaDoCarro = "PCN-3466",
-            HoraEntrada = DateTime.Now.ToString(),
-            HoraSaida = DateTime.Now.AddHours(2).ToString()
-            }
-        };
-    public CarroController()
+        private readonly DataContext _context;
+    public VeiculoController(DataContext context)
     {
+            _context = context;
        
     }
 
     [HttpGet]
     public IEnumerable<Veiculo> Get()
     {
-        return _veiculo;
+        return _context.Veiculos;
 
     }
     [HttpGet("{id}")]
-    public IEnumerable<Veiculo> GetById(int id)
+    public Veiculo GetById(int id)
     {
-        return _veiculo.Where(Veiculo => Veiculo.VeiculoId == id);
+        return _context.Veiculos.FirstOrDefault(Veiculo => Veiculo.VeiculoId == id);
 
     }
      [HttpPost]
