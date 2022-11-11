@@ -8,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VeiculosComponent implements OnInit {
 
-  public veiculos: any;
+  public veiculos: any = [];
+  public veiculosFiltrados: any = []
+
+  private _filtroLista: string = "";
+
+  public get filtroLista() : string{
+    return this._filtroLista;
+  }
+  public set filtroLista(value: string){
+    this._filtroLista = value;
+    this.veiculosFiltrados = this.filtroLista ? this.filtrarVeiculos(this.filtroLista) : this.veiculos;
+  }
+
+  filtrarVeiculos(filtrarPor: string): any{
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.veiculos.filter(
+    (veiculo: any) => veiculo.placaDoVeiculo.toLocaleLowerCase().indexOf(filtrarPor)!== -1
+    )
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -18,10 +36,12 @@ export class VeiculosComponent implements OnInit {
 
   public getVeiculos(): void{
     this.http.get('https://localhost:7121/api/Veiculo').subscribe(
-      Response => this.veiculos = Response,
+      Response => {
+        this.veiculos = Response,
+        this.veiculosFiltrados = this.veiculos
+      },
       error => console.log(error)
-
-    );
+      );
   }
 
 }
