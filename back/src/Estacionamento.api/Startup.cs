@@ -32,6 +32,7 @@ namespace Estacionamento.API
                 context => context.UseSqlite(Configuration.GetConnectionString("default"))
             );
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Estacionamento.api", Version = "v1" });
@@ -53,6 +54,11 @@ namespace Estacionamento.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(cors => cors.AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .AllowAnyOrigin());
+
 
             app.UseEndpoints(endpoints =>
             {

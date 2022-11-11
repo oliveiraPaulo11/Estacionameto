@@ -13,7 +13,6 @@ public class VeiculoController : ControllerBase
     public VeiculoController(DataContext context)
     {
             _context = context;
-       
     }
 
     [HttpGet]
