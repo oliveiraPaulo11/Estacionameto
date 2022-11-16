@@ -1,4 +1,4 @@
-namespace Estacionamento.api.Models
+namespace Estacionamento.Domain
 {
     public enum TipoVeiculo : int
     {

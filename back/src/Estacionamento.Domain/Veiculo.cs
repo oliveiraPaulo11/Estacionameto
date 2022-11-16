@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Estacionamento.api.Models
+namespace Estacionamento.Domain
 {
     public class Veiculo
     {
@@ -13,15 +13,15 @@ namespace Estacionamento.api.Models
 
         public string PlacaDoVeiculo { get; set; } ="";
 
-        public string HoraEntrada { get; set; } ="";
+        public DateTime? HoraEntrada { get; set; }
 
-        public string DataEntrada { get; set; } ="";
+        public DateTime? DataEntrada { get; set; } 
 
-        public string HoraSaida { get; set; } ="";
+        public DateTime? HoraSaida { get; set; } 
 
-        public string DataSaida { get; set; } ="";
+        public DateTime? DataSaida { get; set; } 
 
 
-        public double valorAPagar { get; set; }
+        public decimal? valorAPagar { get; set; }
     }
 }

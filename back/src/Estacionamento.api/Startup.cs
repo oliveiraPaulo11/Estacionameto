@@ -2,7 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Estacionamento.api.Data;
+using Estacionamento.Application;
+using Estacionamento.Application.contratos;
+using Estacionamento.Persistence;
+using Estacionamento.Persistence.Contextos;
+using Estacionamento.Persistence.Contratos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,10 +32,13 @@ namespace Estacionamento.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(
+            services.AddDbContext<EstacionamentoContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("default"))
             );
             services.AddControllers();
+            services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<iGeralPersist, GeralPersist>();
+            services.AddScoped<iVeiculoPersist, VeiculoPersist>();
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
