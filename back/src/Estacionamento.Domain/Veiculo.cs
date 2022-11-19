@@ -20,8 +20,9 @@ namespace Estacionamento.Domain
         public DateTime? HoraSaida { get; set; } 
 
         public DateTime? DataSaida { get; set; } 
-
-
         public decimal? valorAPagar { get; set; }
+
+       
+
     }
 }
